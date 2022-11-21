@@ -1,18 +1,22 @@
 package programmierPflicht;
 import java.util.LinkedList;
 
-
 public class Hashtable implements IntStringMap {
 
-    int HashtableLength;
+    // length of hashtable & mod-factor
+    int k;
 
     public Hashtable() {
-        HashtableLength = 5;
+        k = 5;
     }
 
+    // array of linkedlists with length k
+    @SuppressWarnings({"unchecked"})
+    LinkedList<String>[] topArr = new LinkedList[k];
 
     LinkedList<String> testListe = new LinkedList<String>();
 
+    // put method
 	public String put(Integer key, String value) {
         System.out.println("key: " + key);
         System.out.println("value: " + value);
