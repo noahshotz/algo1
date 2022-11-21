@@ -3,8 +3,10 @@ import programmierPflicht.*;
 public class Main {
     public static void main(String[] args){
         Hashtable newHashtable = new Hashtable();
-        newHashtable.put(null, null);
-        newHashtable.get(null, null);
-        newHashtable.remove(null, null);
+        newHashtable.put(0, "10");
+        newHashtable.put(1, "12");
+        newHashtable.put(2, "14");
+        newHashtable.put(3, "15");
+        newHashtable.put(4, "17");
     }
 }
