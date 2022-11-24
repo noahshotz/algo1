@@ -4,46 +4,59 @@ import java.util.LinkedList;
 
 public class Hashtable implements IntStringMap {
 
-    // length of hashtable & mod-factor
+    // Länge der Hashtabelle und hash-Faktor
     public static int k;
 
-    // constructor
+    // Konstruktor
     public Hashtable() {
         k = 11;
     }
 
-    // hash Funktion mit Divisionsrestmethode
-    // nur absolute keys erzwingen
+    // Hashfunktion mit Divisionsrestmethode
+    // positive Keys erzwingen
     public static int hashCode(Integer key, int k) {
         int hashedKey = Math.abs(key % k);
         return hashedKey;
     }
 
-    // array of linkedlists with length k
+    // Array von LinkedLists mit Länge k
     @SuppressWarnings({ "unchecked" })
-    // absoluten wert noch variable aus constructor ersetzen
-    LinkedList<String>[] testListe = new LinkedList[11];
+    // Hartgecodeden Wert mit Variable aus Konstruktor ersetzen
+    public LinkedList<String>[] hashtable = new LinkedList[11];
 
-    // put method
+    // Put-Methode
     public String put(Integer key, String value) {
 
         System.out.println("------------");
+        // Hashfunktion auf Key anwenden
         int hashedKey = hashCode(key, k);
         System.out.println("hashedKey: " + hashedKey);
 
-        // Wenn man gehashten Index des Arrays noch keine LinkedList
+        // Wenn am gehashten Index des Arrays noch keine LinkedList
         // existiert soll eine neue erstellt werden
-        if (testListe[hashedKey] == null) {
+        if (hashtable[hashedKey] == null) {
             System.out.println("Key: " + hashedKey + " - add value: " + value);
-            testListe[hashedKey] = new LinkedList<>();
-            testListe[hashedKey].addLast(value);
+            hashtable[hashedKey] = new LinkedList<>();
+            hashtable[hashedKey].addLast(value);
         } else {
             System.out.println("LinkedList for key " + hashedKey + " already exists, insert value: " + value);
-            testListe[hashedKey].addLast(value);
+            hashtable[hashedKey].addLast(value);
         }
-        System.out.println(testListe[hashedKey] + "\n");
+        System.out.println(hashtable[hashedKey] + "\n");
 
         return null;
+    }
+
+    public void returnHashtable() {
+
+        String returnHashtable = "";
+
+        for (int i = 0; i < hashtable.length; i++) {
+            returnHashtable += "Index " + i + ": " + hashtable[i] + "\n";
+        }
+        System.out.println("------------");
+        System.out.println(returnHashtable);
+        System.out.println("------------");
     }
 
     public String get(Integer key) {
@@ -53,13 +66,13 @@ public class Hashtable implements IntStringMap {
         System.out.println("------------");
         System.out.println("hashedKey:" + hashedKey);
         System.out.println(
-            "LinkedList für key " + 
-            hashedKey + ": " + 
-            testListe[hashedKey]);
+                "LinkedList für key " +
+                        hashedKey + ": " +
+                        hashtable[hashedKey]);
         System.out.println(
-            "Letztes Element für key " + hashedKey + ": " + 
-            testListe[hashedKey].getLast() 
-            + "\n");
+                "Letztes Element für key " + hashedKey + ": " +
+                        hashtable[hashedKey].getLast()
+                        + "\n");
 
         return null;
     }
@@ -67,4 +80,5 @@ public class Hashtable implements IntStringMap {
     public String remove(Integer key) {
         return null;
     }
+
 }

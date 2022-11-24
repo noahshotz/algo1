@@ -13,5 +13,8 @@ public class Main {
         newHashtable.put(6, "17");
 
         newHashtable.put(8, "85");
+
+        newHashtable.returnHashtable();
+
     }
 }
