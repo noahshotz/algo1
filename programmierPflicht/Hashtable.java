@@ -12,6 +12,8 @@ public class Hashtable implements IntStringMap {
         k = 5;
     }
 
+    // hash Funktion mit Divisionsrestmethode
+    // -> negative keys verhindern
     public static int hashCode(Integer key, int k) {
         int hashedKey = key % k;
         return hashedKey;
@@ -30,6 +32,8 @@ public class Hashtable implements IntStringMap {
         int hashedKey = hashCode(key, k);
         System.out.println("hashedKey:" + hashedKey);
 
+        // Wenn man gehashten Index des Arrays noch keine LinkedList
+        // existiert soll eine neue erstellt werden
         if (testListe[hashedKey] == null) {
             System.out.println("Key: " + hashedKey + " - add value: " + value + " at position " + innerIndex);
             testListe[hashedKey] = new LinkedList<>();
