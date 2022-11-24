@@ -19,6 +19,19 @@ public class Hashtable implements IntStringMap {
         return hashedKey;
     }
 
+    // Hashtable kosmetisch aufbereitet ausgeben
+    public void returnHashtable() {
+
+        String returnHashtable = "";
+
+        for (int i = 0; i < hashtable.length; i++) {
+            returnHashtable += "Index " + i + ": " + hashtable[i] + "\n";
+        }
+        System.out.println("---------------");
+        System.out.println(returnHashtable);
+        System.out.println("---------------");
+    }
+
     // Array von LinkedLists mit Länge k
     @SuppressWarnings({ "unchecked" })
     // Hartgecodeden Wert mit Variable aus Konstruktor ersetzen
@@ -27,7 +40,7 @@ public class Hashtable implements IntStringMap {
     // Put-Methode
     public String put(Integer key, String value) {
 
-        System.out.println("------------");
+        System.out.println("---------------");
         // Hashfunktion auf Key anwenden
         int hashedKey = hashCode(key, k);
         System.out.println("hashedKey: " + hashedKey);
@@ -46,24 +59,13 @@ public class Hashtable implements IntStringMap {
 
         return null;
     }
-
-    public void returnHashtable() {
-
-        String returnHashtable = "";
-
-        for (int i = 0; i < hashtable.length; i++) {
-            returnHashtable += "Index " + i + ": " + hashtable[i] + "\n";
-        }
-        System.out.println("------------");
-        System.out.println(returnHashtable);
-        System.out.println("------------");
-    }
-
+    
+    // Get-Methode
     public String get(Integer key) {
 
         int hashedKey = hashCode(key, k);
 
-        System.out.println("------------");
+        System.out.println("---------------");
         System.out.println("hashedKey:" + hashedKey);
         System.out.println(
                 "LinkedList für key " +
@@ -77,6 +79,7 @@ public class Hashtable implements IntStringMap {
         return null;
     }
 
+    // Remove-Methode
     public String remove(Integer key) {
         return null;
     }
