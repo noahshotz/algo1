@@ -15,7 +15,7 @@ public class Hashtable implements IntStringMap {
     // hash Funktion mit Divisionsrestmethode
     // -> negative keys verhindern
     public static int hashCode(Integer key, int k) {
-        int hashedKey = key % k;
+        int hashedKey = Math.abs(key % k);
         return hashedKey;
     }
 
