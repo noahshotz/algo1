@@ -13,6 +13,8 @@ public class Main {
         newHashtable.put(2, "20");
         newHashtable.put(2, "25");
         newHashtable.put(2, "30");
-
+        
+        newHashtable.get(0);
+        newHashtable.get(2);
     }
 }
