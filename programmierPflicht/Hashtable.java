@@ -37,10 +37,8 @@ public class Hashtable implements IntStringMap {
 
     class KeyValuePair {
         public static KeyValuePair newEntry;
-
         public static Entry<Integer, String> newEntry(Integer key, String value) {
             Map.Entry<Integer, String> newEntry = new AbstractMap.SimpleEntry<Integer, String>(key, value);
-
             return newEntry;
         }
     }
@@ -69,12 +67,18 @@ public class Hashtable implements IntStringMap {
             for (int i = 0; i < hashtable[hashedKey].size(); i++) {
                 if (hashtable[hashedKey].get(i).getKey() == key) {
                     keyExists = true;
-                    System.out.println("existing value " + hashtable[hashedKey].get(i).getValue() + " has to be replaced by value: " + value);
+                    System.out.println("existing key " + key + " with value " + hashtable[hashedKey].get(i).getValue() + " has to be replaced by new value: " + value);
+
+                    String removedValue = hashtable[hashedKey].get(i).getValue();
+
                     hashtable[hashedKey].set(
                         // entry position
                         0,
                         // entry value
                         KeyValuePair.newEntry(key, value));
+
+                    return removedValue;
+
                 }
             }
             if (!keyExists) {
@@ -82,7 +86,6 @@ public class Hashtable implements IntStringMap {
             }
         }
         System.out.println(hashtable[hashedKey] + "\n");
-
 
         return null;
     }
