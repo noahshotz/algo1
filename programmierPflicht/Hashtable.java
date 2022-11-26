@@ -73,7 +73,7 @@ public class Hashtable implements IntStringMap {
 
                     hashtable[hashedKey].set(
                         // entry position
-                        0,
+                        i,
                         // entry value
                         KeyValuePair.newEntry(key, value));
 
