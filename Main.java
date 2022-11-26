@@ -14,6 +14,8 @@ public class Main {
 
         newHashtable.put(8, "85");
 
+        newHashtable.put(24, "tester");
+
         newHashtable.returnHashtable();
 
     }
