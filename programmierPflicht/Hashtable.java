@@ -1,6 +1,9 @@
 package programmierPflicht;
 
+import java.util.AbstractMap;
 import java.util.LinkedList;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class Hashtable implements IntStringMap {
 
@@ -32,10 +35,19 @@ public class Hashtable implements IntStringMap {
         System.out.println("---------------");
     }
 
+    class KeyValuePair {
+        public static KeyValuePair newEntry;
+        public static Entry<Integer, String> newEntry(Integer key, String value) {
+            Map.Entry<Integer,String> newEntry = new AbstractMap.SimpleEntry<Integer, String>(key, value);
+
+            return newEntry;
+        }
+    }
+
     // Array von LinkedLists mit Länge k
     @SuppressWarnings({ "unchecked" })
     // Hartgecodeden Wert mit Variable aus Konstruktor ersetzen
-    public LinkedList<String>[] hashtable = new LinkedList[11];
+    public LinkedList<Entry<Integer, String>>[] hashtable = new LinkedList[11];
 
     // Put-Methode
     public String put(Integer key, String value) {
@@ -49,11 +61,16 @@ public class Hashtable implements IntStringMap {
         // existiert soll eine neue erstellt werden
         if (hashtable[hashedKey] == null) {
             System.out.println("Key: " + hashedKey + " - add value: " + value);
-            hashtable[hashedKey] = new LinkedList<>();
-            hashtable[hashedKey].addLast(value);
+            hashtable[hashedKey] = new LinkedList<Entry<Integer, String>>();
+            hashtable[hashedKey].addLast(KeyValuePair.newEntry(key, value));
         } else {
+            //if (!hashtable[hashedKey].contains()) {
+                // Wenn der Original-Key bereits in der Hashmap existiert, wird
+                // der alte Wert entfernt und zurückgegeben, sonst wird
+                // null zurueckgegeben
+            //}
             System.out.println("LinkedList for key " + hashedKey + " already exists, insert value: " + value);
-            hashtable[hashedKey].addLast(value);
+            hashtable[hashedKey].addLast(KeyValuePair.newEntry(key, value));
         }
         System.out.println(hashtable[hashedKey] + "\n");
 
