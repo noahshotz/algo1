@@ -2,8 +2,10 @@ import programmierPflicht.*;
 
 public class Main {
     public static void main(String[] args) {
+        // create new hashtable
         Hashtable newHashtable = new Hashtable();
 
+        // initial insert of values into hashtable
         newHashtable.put(2, "23");
         newHashtable.put(2, "34");
         newHashtable.put(2, "78");
@@ -13,9 +15,16 @@ public class Main {
         newHashtable.put(8, "85");
         newHashtable.put(24, "100");
 
-        newHashtable.returnHashtable();
+        // return hashtable initial fill
+        newHashtable.returnHashtable(); 
 
+        // get value from hashtable at key 2
         newHashtable.get(2);
+
+        // remove value at key 2 from hashtable
+        newHashtable.remove(2);
+        // return hashtable after value have been removed
+        newHashtable.returnHashtable();
 
     }
 }

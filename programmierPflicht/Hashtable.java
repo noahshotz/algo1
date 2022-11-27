@@ -7,22 +7,21 @@ import java.util.Map.Entry;
 
 public class Hashtable implements IntStringMap {
 
-    // Länge der Hashtabelle und hash-Faktor
+    // k sets length of hashtable and mod factor
     public static int k;
 
-    // Konstruktor
+    // constructor
     public Hashtable() {
         k = 11;
     }
 
-    // Hashfunktion mit Divisionsrestmethode
-    // positive Keys erzwingen
+    // hash keys using mod function
     public static int hashCode(Integer key, int k) {
         int hashedKey = Math.abs(key % k);
         return hashedKey;
     }
 
-    // Hashtable kosmetisch aufbereitet ausgeben
+    // helper to pretty-print hashtable
     public void returnHashtable() {
 
         String returnHashtable = "";
@@ -35,6 +34,7 @@ public class Hashtable implements IntStringMap {
         System.out.println("---------------");
     }
 
+    // store key-value-pairs in linkedlist
     class KeyValuePair {
         public static KeyValuePair newEntry;
         public static Entry<Integer, String> newEntry(Integer key, String value) {
@@ -43,86 +43,78 @@ public class Hashtable implements IntStringMap {
         }
     }
 
-    // Array von LinkedLists mit Länge k
+    // array of LinkedLists with length k
     @SuppressWarnings({ "unchecked" })
     // Hartgecodeden Wert mit Variable aus Konstruktor ersetzen
     public LinkedList<Entry<Integer, String>>[] hashtable = new LinkedList[11];
 
-    // Put-Methode
+    // put-method
     public String put(Integer key, String value) {
 
-        System.out.println("---------------");
-        // Hashfunktion auf Key anwenden
+        // apply hash function on key
         int hashedKey = hashCode(key, k);
-        System.out.println("hashedKey: " + hashedKey);
 
-        // Wenn am gehashten Index des Arrays noch keine LinkedList
-        // existiert soll eine neue erstellt werden
+        // create new linkedlist if none exists at index
+        // index = hashed key
         boolean keyExists = false;
         if (hashtable[hashedKey] == null) {
-            System.out.println("Key: " + hashedKey + " - add value: " + value);
             hashtable[hashedKey] = new LinkedList<Entry<Integer, String>>();
             hashtable[hashedKey].addLast(KeyValuePair.newEntry(key, value));
         } else {
+            // overwrite value if keys are duplicate
             for (int i = 0; i < hashtable[hashedKey].size(); i++) {
                 if (hashtable[hashedKey].get(i).getKey() == key) {
                     keyExists = true;
-                    System.out.println("existing key " + key + " with value " + hashtable[hashedKey].get(i).getValue() + " has to be replaced by new value: " + value);
-
+                    // store removed value
                     String removedValue = hashtable[hashedKey].get(i).getValue();
-
                     hashtable[hashedKey].set(
                         // entry position
                         i,
                         // entry value
                         KeyValuePair.newEntry(key, value));
-
                     return removedValue;
                 }
             }
+            // add key & value if key does not exist yet
             if (!keyExists) {
                 hashtable[hashedKey].addLast(KeyValuePair.newEntry(key, value));
             }
         }
-        System.out.println(hashtable[hashedKey] + "\n");
         return null;
     }
 
-    // Get-Methode
+    // get-method
     public String get(Integer key) {
-
         int hashedKey = hashCode(key, k);
-
-        System.out.println("GET:");
-        System.out.println("Hashed key: " + hashedKey);
-
+        String getValue = null;
         for(int i = 0; i < hashtable[hashedKey].size(); i++) {
             if (hashtable[hashedKey].get(i).getKey() == key) {
-                System.out.println("Matching value: " + hashtable[hashedKey].get(i).getValue());
-                return hashtable[hashedKey].get(i).getValue();
+                getValue = hashtable[hashedKey].get(i).getValue();
             }
         };
-        System.out.println("---------------");
-        return null;
+        if (getValue == null) {
+            return null;
+        } else {
+            System.out.println("Matching value for key " + key + ": " + getValue + "\n");
+            return getValue;
+        }
     }
 
-    // Remove-Methode
+    // remove-method
     public String remove(Integer key) {
         int hashedKey = hashCode(key, k);
-
-        System.out.println("GET:");
-        System.out.println("Hashed key: " + hashedKey);
-
-        String removedValue;
+        String removedValue = null;
         for(int i = 0; i < hashtable[hashedKey].size(); i++) {
             if (hashtable[hashedKey].get(i).getKey() == key) {
                 removedValue = hashtable[hashedKey].get(i).getValue();
                 hashtable[hashedKey].remove(i);
-                return removedValue;
             }
         };
-        System.out.println("---------------");
-        return null;
+        if (removedValue == null) {
+            return null;
+        } else {
+            System.out.println("Removed value for " + key + ": " + removedValue);
+            return removedValue;
+        }
     }
-
 }
