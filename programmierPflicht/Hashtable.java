@@ -78,7 +78,6 @@ public class Hashtable implements IntStringMap {
                         KeyValuePair.newEntry(key, value));
 
                     return removedValue;
-
                 }
             }
             if (!keyExists) {
@@ -86,7 +85,6 @@ public class Hashtable implements IntStringMap {
             }
         }
         System.out.println(hashtable[hashedKey] + "\n");
-
         return null;
     }
 
@@ -95,22 +93,35 @@ public class Hashtable implements IntStringMap {
 
         int hashedKey = hashCode(key, k);
 
-        System.out.println("---------------");
-        System.out.println("hashedKey:" + hashedKey);
-        System.out.println(
-                "LinkedList für hashedKey " +
-                        hashedKey + ": " +
-                        hashtable[hashedKey]);
-        System.out.println(
-                "Letztes Element für hashedKey " + hashedKey + ": " +
-                        hashtable[hashedKey].getLast()
-                        + "\n");
+        System.out.println("GET:");
+        System.out.println("Hashed key: " + hashedKey);
 
+        for(int i = 0; i < hashtable[hashedKey].size(); i++) {
+            if (hashtable[hashedKey].get(i).getKey() == key) {
+                System.out.println("Matching value: " + hashtable[hashedKey].get(i).getValue());
+                return hashtable[hashedKey].get(i).getValue();
+            }
+        };
+        System.out.println("---------------");
         return null;
     }
 
     // Remove-Methode
     public String remove(Integer key) {
+        int hashedKey = hashCode(key, k);
+
+        System.out.println("GET:");
+        System.out.println("Hashed key: " + hashedKey);
+
+        String removedValue;
+        for(int i = 0; i < hashtable[hashedKey].size(); i++) {
+            if (hashtable[hashedKey].get(i).getKey() == key) {
+                removedValue = hashtable[hashedKey].get(i).getValue();
+                hashtable[hashedKey].remove(i);
+                return removedValue;
+            }
+        };
+        System.out.println("---------------");
         return null;
     }
 
