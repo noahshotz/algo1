@@ -23,9 +23,8 @@ public class Hashtable implements IntStringMap {
 
     // helper to pretty-print hashtable
     public void returnHashtable() {
-
         String returnHashtable = "";
-
+        
         for (int i = 0; i < hashtable.length; i++) {
             returnHashtable += "Index " + i + ": " + hashtable[i] + "\n";
         }
@@ -119,7 +118,7 @@ public class Hashtable implements IntStringMap {
         if (removedValue == null) {
             return null;
         } else {
-            System.out.println("Removed value for " + key + ": " + removedValue);
+            System.out.println("Removed value for key" + key + ": " + removedValue);
             return removedValue;
         }
     }
