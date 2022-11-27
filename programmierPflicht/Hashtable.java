@@ -62,11 +62,13 @@ public class Hashtable implements IntStringMap {
             hashtable[hashedKey].addLast(KeyValuePair.newEntry(key, value));
         } else {
             // overwrite value if keys are duplicate
-            for (int i = 0; i < hashtable[hashedKey].size(); i++) {
-                if (hashtable[hashedKey].get(i).getKey() == key) {
+            int i = 0;
+            Map.Entry<Integer, String> hashtableItem = hashtable[hashedKey].get(i);
+            for (i = 0; i < hashtable[hashedKey].size(); i++) {
+                if (hashtableItem.getKey() == key) {
                     keyExists = true;
                     // store removed value
-                    String removedValue = hashtable[hashedKey].get(i).getValue();
+                    String removedValue = hashtableItem.getValue();
                     hashtable[hashedKey].set(
                         // entry position
                         i,
@@ -87,9 +89,11 @@ public class Hashtable implements IntStringMap {
     public String get(Integer key) {
         int hashedKey = hashCode(key, k);
         String getValue = null;
-        for(int i = 0; i < hashtable[hashedKey].size(); i++) {
-            if (hashtable[hashedKey].get(i).getKey() == key) {
-                getValue = hashtable[hashedKey].get(i).getValue();
+        int i = 0;
+        Map.Entry<Integer, String> hashtableItem = hashtable[hashedKey].get(i);
+        for(i = 0; i < hashtable[hashedKey].size(); i++) {
+            if (hashtableItem.getKey() == key) {
+                getValue = hashtableItem.getValue();
             }
         };
         if (getValue == null) {
@@ -104,9 +108,11 @@ public class Hashtable implements IntStringMap {
     public String remove(Integer key) {
         int hashedKey = hashCode(key, k);
         String removedValue = null;
-        for(int i = 0; i < hashtable[hashedKey].size(); i++) {
-            if (hashtable[hashedKey].get(i).getKey() == key) {
-                removedValue = hashtable[hashedKey].get(i).getValue();
+        int i = 0;
+        Map.Entry<Integer, String> hashtableItem = hashtable[hashedKey].get(i);
+        for(i = 0; i < hashtable[hashedKey].size(); i++) {
+            if (hashtableItem.getKey() == key) {
+                removedValue = hashtableItem.getValue();
                 hashtable[hashedKey].remove(i);
             }
         };
